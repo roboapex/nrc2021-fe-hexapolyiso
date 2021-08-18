@@ -24,7 +24,7 @@ while (1):
 
 
 
-    k = cv2.waitKey(5) & 0xFF
+    k = cv2.waitKey(10) & 0xFF
     if k == 27:
         break
 
