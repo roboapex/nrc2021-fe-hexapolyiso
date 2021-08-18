@@ -1,7 +1,7 @@
 import cv2
 import numpy as np
 
-cap = cv2.VideoCapture(0)
+cap = cv2.VideoCapture(1)
 
 while (1):
     _, frame = cap.read()
@@ -28,6 +28,7 @@ while (1):
     #cv2.imshow('Erosion', erosion)
     #cv2.imshow('Dilation', dilation)
 
+    cv2.imshow('res', res)
     cv2.imshow('median', median)
 
 
