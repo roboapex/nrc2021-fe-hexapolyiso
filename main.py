@@ -1,40 +1,47 @@
 import cv2
-import numpy as np
+import numpy
 import tensorflow as tf
 import pandas as pd
 import tensorflow_hub as hub
 
 
+
 cap = cv2.VideoCapture(0)
 
+width = 512
+height = 512
+
 while (1):
+    #Capture frame by frame
     _, frame = cap.read()
-    hsv = cv2.cvtColor(frame, cv2.COLOR_BGR2HSV)
 
-    lower_red = np.array([30, 150, 50])
-    upper_red = np.array([255, 255, 180])
+    blurred = cv2.medianBlur(frame, 15)
 
-    lower_green = np.array([40, 100, 30])
-    upper_green = np.array([80, 255, 255])
+    #Convert img to HSV
+    hsv = cv2.cvtColor(blurred, cv2.COLOR_BGR2HSV)
+    
+
+
+    #Value for red (To be changed)
+    lower_red = numpy.array([30, 150, 50])
+    upper_red = numpy.array([255, 255, 180])
+
+    #Value for green (Probably fixed)
+    lower_green = numpy.array([40, 100, 30])
+    upper_green = numpy.array([80, 255, 255])
 
     mask = cv2.inRange(hsv, lower_green, upper_green)
-    res = cv2.bitwise_and(frame, frame, mask=mask)
 
+    contours, _ = cv2.findContours(mask, cv2.RETR_TREE, cv2.CHAIN_APPROX_NONE)
 
-    #kernel = np.ones((5, 5), np.uint8)
-    #erosion = cv2.erode(mask, kernel, iterations=1)
-    #dilation = cv2.dilate(mask, kernel, iterations=1)
+    for contour in contours:
+        area = cv2.contourArea(contour)
+        if area > 8000:
+            cv2.drawContours(frame, contour, -1, (0,255,0), 3)
+    
 
-    median = cv2.medianBlur(res, 15)
-
-    #cv2.imshow('Original', frame)
-    #cv2.imshow('Mask', mask)
-    #cv2.imshow('Erosion', erosion)
-    #cv2.imshow('Dilation', dilation)
-
-    cv2.imshow('res', res)
-    cv2.imshow('median', median)
-
+    cv2.imshow('Original', frame)
+    cv2.imshow('Mask', mask)
 
 
     k = cv2.waitKey(10) & 0xFF
