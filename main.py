@@ -23,25 +23,32 @@ while (1):
 
 
     #Value for red (To be changed)
-    lower_red = numpy.array([30, 150, 50])
-    upper_red = numpy.array([255, 255, 180])
+    lower_red = numpy.array([136, 87, 111])
+    upper_red = numpy.array([105, 255, 255])
 
     #Value for green (Probably fixed)
     lower_green = numpy.array([40, 100, 30])
     upper_green = numpy.array([80, 255, 255])
 
-    mask = cv2.inRange(hsv, lower_green, upper_green)
+    green_mask = cv2.inRange(hsv, lower_green, upper_green)
+    red_mask = cv2.inRange(hsv, lower_red, upper_red)
 
-    contours, _ = cv2.findContours(mask, cv2.RETR_TREE, cv2.CHAIN_APPROX_NONE)
+    contours, _ = cv2.findContours(green_mask, cv2.RETR_TREE, cv2.CHAIN_APPROX_NONE)
+    contours2, _ = cv2.findContours(green_mask, cv2.RETR_TREE, cv2.CHAIN_APPROX_NONE)
 
     for contour in contours:
         area = cv2.contourArea(contour)
         if area > 8000:
             cv2.drawContours(frame, contour, -1, (0,255,0), 3)
+
+    
+    for contour2 in contours2:
+        area2 = cv2.contourArea(contour2)
+        if area2 > 8000:
+            cv2.drawContours(frame, contour2, -1, (0,255,0), 3)
     
 
     cv2.imshow('Original', frame)
-    cv2.imshow('Mask', mask)
 
 
     k = cv2.waitKey(10) & 0xFF
