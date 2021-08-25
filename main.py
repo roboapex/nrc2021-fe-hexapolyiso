@@ -1,8 +1,8 @@
 import cv2
 import numpy as np
 import tensorflow as tf
-import tensorflow_hub as hub
 import pandas as pd
+import tensorflow_hub as hub
 
 
 cap = cv2.VideoCapture(0)
