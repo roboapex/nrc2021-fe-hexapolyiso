@@ -1,8 +1,8 @@
 import cv2
 import numpy
-import tensorflow as tf
-import pandas as pd
-import tensorflow_hub as hub
+# import tensorflow as tf
+# import pandas as pd
+# import tensorflow_hub as hub
 
 
 
@@ -23,8 +23,8 @@ while (1):
 
 
     #Value for red (To be changed)
-    lower_red = numpy.array([136, 87, 111])
-    upper_red = numpy.array([105, 255, 255])
+    lower_red = numpy.array([60,60,60])
+    upper_red = numpy.array([200,200,200])
 
     #Value for green (Probably fixed)
     lower_green = numpy.array([40, 100, 30])
@@ -34,7 +34,7 @@ while (1):
     red_mask = cv2.inRange(hsv, lower_red, upper_red)
 
     contours, _ = cv2.findContours(green_mask, cv2.RETR_TREE, cv2.CHAIN_APPROX_NONE)
-    contours2, _ = cv2.findContours(green_mask, cv2.RETR_TREE, cv2.CHAIN_APPROX_NONE)
+    contours2, _ = cv2.findContours(red_mask, cv2.RETR_TREE, cv2.CHAIN_APPROX_NONE)
 
     for contour in contours:
         area = cv2.contourArea(contour)
@@ -54,6 +54,8 @@ while (1):
     k = cv2.waitKey(10) & 0xFF
     if k == 27:
         break
+
+        
 
 cv2.destroyAllWindows()
 cap.release()
