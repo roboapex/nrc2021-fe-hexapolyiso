@@ -1,15 +1,8 @@
 import cv2
 import numpy
-# import tensorflow as tf
-# import pandas as pd
-# import tensorflow_hub as hub
-
-
 
 cap = cv2.VideoCapture(1)
 
-width = 512
-height = 512
 
 while (1):
     #Capture frame by frame
@@ -36,6 +29,7 @@ while (1):
     contours, _ = cv2.findContours(green_mask, cv2.RETR_TREE, cv2.CHAIN_APPROX_NONE)
     
     contours2, _ = cv2.findContours(red_mask, cv2.RETR_TREE, cv2.CHAIN_APPROX_NONE)
+
     try:
         c= max(contours, key = cv2.contourArea)
         if cv2.contourArea(c)>=8000:
