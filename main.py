@@ -214,7 +214,6 @@ def avoidingstate(redbiggest):
             green_mask = cv2.inRange(hsv, lower_green, upper_green)
 
 
-            cv2.imshow("redmask", red_mask)
 
             contours, _ = cv2.findContours(green_mask, cv2.RETR_TREE, cv2.CHAIN_APPROX_NONE)
 
@@ -243,7 +242,6 @@ def avoidingstate(redbiggest):
 
                     green_mask = cv2.inRange(hsv, lower_green, upper_green)
 
-                    cv2.imshow("redmask", red_mask)
 
                     contours, _ = cv2.findContours(green_mask, cv2.RETR_TREE, cv2.CHAIN_APPROX_NONE)
 
