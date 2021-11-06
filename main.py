@@ -333,8 +333,10 @@ def avoidingstate(redbiggest):
 
 
 def checking_state():
+    print("moving state")
+    forward()
     while (1):
-        forward()
+
         redbiggest = 0
         xcoor = None
         _, frame = cap.read()
