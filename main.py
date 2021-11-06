@@ -105,6 +105,8 @@ while(1):
 
 import RPi.GPIO as GPIO
 import time
+x=input("windows").upper()
+
 deg90=0.335
 
 in1 = 14
@@ -217,7 +219,8 @@ def avoidingstate(redbiggest):
             hsv = cv2.cvtColor(blurred, cv2.COLOR_BGR2HSV)
 
             red_mask = cv2.inRange(hsv, lower_red, upper_red) + cv2.inRange(hsv, lower_red2, upper_red2)
-            cv2.imshow("redmask", red_mask)
+            if x == "YES":
+                cv2.imshow("redmask", red_mask)
 
             contours2, _ = cv2.findContours(red_mask, cv2.RETR_TREE, cv2.CHAIN_APPROX_NONE)
             if len(contours2) > 0:
@@ -244,7 +247,8 @@ def avoidingstate(redbiggest):
                     hsv = cv2.cvtColor(blurred, cv2.COLOR_BGR2HSV)
 
                     red_mask = cv2.inRange(hsv, lower_red, upper_red) + cv2.inRange(hsv, lower_red2, upper_red2)
-                    cv2.imshow("redmask", red_mask)
+                    if x == "YES":
+                        cv2.imshow("redmask", red_mask)
 
                     contours2, _ = cv2.findContours(red_mask, cv2.RETR_TREE, cv2.CHAIN_APPROX_NONE)
                     if len(contours2) > 0:
@@ -347,9 +351,9 @@ def checking_state():
 
         green_mask = cv2.inRange(hsv, lower_green, upper_green)
         red_mask = cv2.inRange(hsv, lower_red, upper_red) + cv2.inRange(hsv, lower_red2, upper_red2)
-
-        cv2.imshow("redmask", red_mask)
-        cv2.imshow("greenmask", green_mask)
+        if x == "YES":
+            cv2.imshow("redmask", red_mask)
+            cv2.imshow("greenmask", green_mask)
 
         contours, _ = cv2.findContours(green_mask, cv2.RETR_TREE, cv2.CHAIN_APPROX_NONE)
 
@@ -396,8 +400,8 @@ def checking_state():
         until sense again then turn other direction
         '''
 
-
-        cv2.imshow('Original', frame)
+        if x=="YES":
+            cv2.imshow('Original', frame)
 
         k = cv2.waitKey(10) & 0xFF
         if k == 27:
