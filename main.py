@@ -177,8 +177,8 @@ import time
 wid=320
 hei=240
 
-greentresh=100
-redtresh=10
+greentresh=100#temp
+redtresh=10#temp
 
 cap = cv2.VideoCapture(0)
 cap.set(cv2.CAP_PROP_FRAME_WIDTH,wid)
@@ -230,7 +230,7 @@ def avoidingstate(redbiggest):
                     cv2.line(frame, (int(x2 + (w2 / 2)), 0), (int(x2 + (w2 / 2)), len(blurred)), (0, 0, 255), 1)
                     redbiggest = 1
                     xcoor = int(x2 + (w2 / 2)) / wid
-            if xcoor < redtresh:
+            if xcoor < redtresh:#need change operator and the value of rtedtresh
                 finalturningtime = time.time() - (startturningtime)
                 stop()
                 forward()
