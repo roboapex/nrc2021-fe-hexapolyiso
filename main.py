@@ -432,7 +432,8 @@ def avoidingstate(redbiggest, xcoor):
 
 
 
-avoidingstate()
+#avoidingstate()
+forward()
 
 cv2.destroyAllWindows()
 cap.release()
