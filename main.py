@@ -207,7 +207,7 @@ minsize=2000
 def checking_state():
     print("moving state")
     forward()
-    while (0):
+    while (1):
 
         redbiggest = 0
         #xcoor = None
