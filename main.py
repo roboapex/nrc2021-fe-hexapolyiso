@@ -247,6 +247,10 @@ def checking_state():
             print("avoiding state")
             avoidingstate(redbiggest)
             pass
+        
+        if redbiggest == 0:
+            print("fk u")
+            pass
 
 
         if wind=="YES":
@@ -256,7 +260,7 @@ def checking_state():
         if k == 27:
             break
 
-        return redbiggest
+        
     
 def avoidingstate(redbiggest):
     while checking_state():
