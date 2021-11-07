@@ -1,63 +1,68 @@
 import RPi.GPIO as GPIO
 import time
-deg90=0.335
 
-in1 = 14
-in2 = 15
-in3 = 9
-in4=11
+#deg90=0.335
+
+in1 = 14 #change
+in2 = 15 #change
+in3 = 9 #change
+in4=11 #change
 en1 = 13
 en2 = 12
-temp1=1
+
+#INITIALISE 
 GPIO.setmode(GPIO.BCM)
 GPIO.setup(in1,GPIO.OUT)
 GPIO.setup(in2,GPIO.OUT)
 GPIO.setup(in4,GPIO.OUT)
 GPIO.setup(in3,GPIO.OUT)
 GPIO.setup(en1,GPIO.OUT)
+GPIO.output(in1,GPIO.LOW)
+GPIO.output(in2,GPIO.LOW)
+GPIO.output(in3, GPIO.LOW)
+GPIO.output(in4, GPIO.LOW)
+
 p=GPIO.PWM(en1,1000)
 GPIO.setup(en2,GPIO.OUT)
 p2=GPIO.PWM(en2,1000)
+
+#SET SPEED
 p.start(60)
 p2.start(60)
-def forward():
-    GPIO.output(in1,GPIO.LOW)
-    GPIO.output(in2,GPIO.HIGH)
-    GPIO.output(in3,GPIO.LOW)
-    GPIO.output(in4,GPIO.HIGH)
-def backward():
-    GPIO.output(in1,True)
-    GPIO.output(in2,False)
-    GPIO.output(in3,True)
-    GPIO.output(in4,False)
-def right():
-    GPIO.output(in1,GPIO.LOW)
-    GPIO.output(in2,GPIO.HIGH)
-    GPIO.output(in3,True)
-    GPIO.output(in4,False)
-def left():
-    GPIO.output(in1,False)
-    GPIO.output(in2,True)
-    GPIO.output(in3,GPIO.LOW)
-    GPIO.output(in4,GPIO.HIGH)
-def stop():
-    GPIO.output(in1,False)
-    GPIO.output(in2,False)
-    GPIO.output(in3,False)
-    GPIO.output(in4,False)
 
-stop()
+#MOVEMENT FUNCTIONS
+def forward():
+    GPIO.output(in1,GPIO.HIGH)
+    GPIO.output(in2,GPIO.LOW)
+    GPIO.output(in3,GPIO.HIGH)
+    GPIO.output(in4,GPIO.LOW)
+def backward():
+    GPIO.output(in1,GPIO.LOW)
+    GPIO.output(in2,GPIO.HIGH)
+    GPIO.output(in3,GPIO.LOW)
+    GPIO.output(in4,GPIO.HIGH)
+def right():
+    GPIO.output(in1,GPIO.HIGH)
+    GPIO.output(in2,GPIO.LOW)
+    GPIO.output(in3,GPIO.LOW)
+    GPIO.output(in4,GPIO.LOW)
+def left():
+    GPIO.output(in1,GPIO.LOW)
+    GPIO.output(in2,GPIO.LOW)
+    GPIO.output(in3,GPIO.HIGH)
+    GPIO.output(in4,GPIO.LOW)
+def stop():
+    GPIO.output(in1,GPIO.LOW)
+    GPIO.output(in2,GPIO.LOW)
+    GPIO.output(in3,GPIO.LOW)
+    GPIO.output(in4,GPIO.LOW)
+
 def gos(f,s):
     f()
     time.sleep(s)
-    forward()
-    time.sleep(0.1)
-    stop()
-    time.sleep(0.1)
-    backward()
-    time.sleep(0.1)
-    stop()
-    time.sleep(0.5)
+
+
+'''
 def movetank(s1,s2,tim):
     p.ChangeDutyCycle(abs(s1))
     p2.ChangeDutyCycle(abs(s2))
@@ -78,11 +83,13 @@ def movetank(s1,s2,tim):
     time.sleep(0.1)
     stop()
     time.sleep(0.05)
-if __name__=="__main__":
-    movetank(50,50,5)
-    gos(forward, 6)
-    gos(right, 0.5)
-    gos(forward, 6)
-    GPIO.cleanup()
+'''
 
-        
+if __name__== "__main__":
+    gos(forward, 5)
+    gos(right, 0.5)
+    gos(forward, 5)
+    gos(left, 0.5)
+    gos(backward, 5)
+    stop()
+    GPIO.cleanup()
