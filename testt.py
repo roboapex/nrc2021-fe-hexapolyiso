@@ -60,8 +60,8 @@ def gos(f,s):
     stop()
     time.sleep(0.5)
 if __name__=="__main__":
-    p.ChangeDutyCycle(80)
-    p2.ChangeDutyCycle(40)
+    p.ChangeDutyCycle(40)
+    p2.ChangeDutyCycle(60)
     forward()
     time.sleep(10)
     GPIO.cleanup()
