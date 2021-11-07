@@ -412,7 +412,7 @@ def avoidingstate(redbiggest):
 
 
 checking_state()
-avoidingstate()
+
 
 cv2.destroyAllWindows()
 cap.release()
