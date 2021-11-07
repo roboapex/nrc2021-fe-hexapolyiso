@@ -345,6 +345,7 @@ def checking_state():
         xcoor = None
         _, frame = cap.read()
         blurred = frame
+        print("Nothing.")
 
         # Convert img to HSV
         hsv = cv2.cvtColor(blurred, cv2.COLOR_BGR2HSV)
@@ -368,6 +369,7 @@ def checking_state():
                 cv2.rectangle(frame, (x, y), (x + w, y + h), (0, 255, 0), 2)
                 cv2.line(frame, (int(x + (w / 2)), 0), (int(x + (w / 2)), len(blurred)), (0, 255, 0), 1)
                 redbiggest = -1
+                print("Green detected")
                 xcoor = int(x + (w / 2)) / wid
         if len(contours2) > 0:
             # print("green")
@@ -378,6 +380,7 @@ def checking_state():
                 cv2.rectangle(frame, (x2, y2), (x2 + w2, y2 + h2), (0, 0, 255), 2)
                 cv2.line(frame, (int(x2 + (w2 / 2)), 0), (int(x2 + (w2 / 2)), len(blurred)), (0, 0, 255), 1)
                 redbiggest = 1
+                print("Red detected")
                 xcoor = int(x2 + (w2 / 2)) / wid
                 try:
                     if cv2.contourArea(c2) > cv2.contourArea(c):
