@@ -80,4 +80,4 @@ def movetank(s1,s2,tim):
     stop()
     time.sleep(0.5)
 if __name__=="__main__":
-    movetank(65 ,100, 8)
+    movetank(1 ,100, 8)
