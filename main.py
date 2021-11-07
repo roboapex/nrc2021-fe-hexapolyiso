@@ -153,19 +153,6 @@ def stop():
     GPIO.output(in3,False)
     GPIO.output(in4,False)
 
-stop()
-def gos(f,s):
-    f()
-    time.sleep(s)
-    forward()
-    time.sleep(0.1)
-    stop()
-    time.sleep(0.1)
-    backward()
-    time.sleep(0.1)
-    stop()
-    time.sleep(0.5)
-
 
 
 import cv2
@@ -282,7 +269,7 @@ def avoidingstate(redbiggest):
         if redbiggest == 0:
             forward()
 
-
+avoidingstate()
 
 cv2.destroyAllWindows()
 cap.release()
