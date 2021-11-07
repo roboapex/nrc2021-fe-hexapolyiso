@@ -267,15 +267,15 @@ def checking_state():
                     else:
                         print("green closer", end="\r")
                         redbiggest = -1
-                        M = cv2.moments(c)
+                        M = cv2.moments(c2)
                         xcoor = int(M['m10']/M['m00'])
                         
                 except:
                     pass
         if redbiggest != 0:
             print("avoiding state")
-            #avoidingstate(redbiggest)
-            #pass
+            avoidingstate(redbiggest)
+            pass
 
         '''
         if lightsensor sense floor thing
@@ -302,10 +302,7 @@ def avoidingstate(redbiggest, xcoor):
     if redbiggest == 0:
         forward()
 
-
-while checking_state():
-    avoidingstate()
-
 cv2.destroyAllWindows()
 cap.release()
+
 
