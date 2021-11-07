@@ -238,7 +238,7 @@ def checking_state():
                 cv2.line(frame, (int(x + (w / 2)), 0), (int(x + (w / 2)), len(blurred)), (0, 255, 0), 1)
                 redbiggest = -1
                 print("Green detected")
-                xcoor = int((x + (w / 2)) / wid)
+                xcoor = int(x + (w / 2)) / wid
         if len(contours2) > 0:
             # print("green")
             c2 = max(contours2, key=cv2.contourArea)
@@ -254,11 +254,11 @@ def checking_state():
                     if cv2.contourArea(c2) > cv2.contourArea(c):
                         print("red closer", end="\r")
                         redbiggest = 1
-                        xcoor = int((x2 + (w2 / 2)) / wid)
+                        xcoor = int(x2 + (w2 / 2)) / wid
                     else:
                         print("green closer", end="\r")
                         redbiggest = -1
-                        xcoor = int((x + (w / 2)) / wid) 
+                        xcoor = int(x + (w / 2)) / wid
                 except:
                     pass
         if redbiggest != 0:
@@ -310,7 +310,7 @@ def avoidingstate(redbiggest):
                         cv2.rectangle(frame, (x2, y2), (x2 + w2, y2 + h2), (0, 0, 255), 2)
                         cv2.line(frame, (int(x2 + (w2 / 2)), 0), (int(x2 + (w2 / 2)), len(blurred)), (0, 0, 255), 1)
                         redbiggest = 1
-                        xcoor = int((x2 + (w2 / 2)) / wid)
+                        xcoor = int(x2 + (w2 / 2)) / wid
                 if xcoor < redtresh: #need change operator and the value of redtresh
                     finalturningtime = time.time() - (startturningtime)
                     stop()
@@ -375,7 +375,7 @@ def avoidingstate(redbiggest):
                         cv2.rectangle(frame, (x, y), (x + w, y + h), (0, 255, 0), 2)
                         cv2.line(frame, (int(x + (w / 2)), 0), (int(x + (w / 2)), len(blurred)), (0, 255, 0), 1)
                         redbiggest = -1
-                        xcoor = int((x + (w / 2)) / wid)
+                        xcoor = int(x + (w / 2)) / wid
                 if xcoor > greentresh:
                     finalturningtime=time.time()-(startturningtime)
                     stop()
@@ -402,7 +402,7 @@ def avoidingstate(redbiggest):
                                 cv2.rectangle(frame, (x, y), (x + w, y + h), (0, 255, 0), 2)
                                 cv2.line(frame, (int(x + (w / 2)), 0), (int(x + (w / 2)), len(blurred)), (0, 255, 0), 1)
                                 redbiggest = -1
-                                xcoor = int((x + (w / 2)) / wid)
+                                xcoor = int(x + (w / 2)) / wid
                         else:
                             break
                     st=time.time()
