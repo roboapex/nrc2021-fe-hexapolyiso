@@ -210,7 +210,7 @@ def checking_state():
     while (0):
 
         redbiggest = 0
-        xcoor = None
+        #xcoor = None
         _, frame = cap.read()
         blurred = frame
         print("Nothing.")
@@ -317,7 +317,7 @@ def avoidingstate(redbiggest):
                     forward()
                     while True:
 
-                        xcoor = None
+                        #xcoor = None
                         _, frame = cap.read()
                         blurred = frame
 
