@@ -64,8 +64,8 @@ def movetank(s1,s2,tim):
     p2.ChangeDutyCycle(abs(s2))
     GPIO.output(in1, s1<0)
     GPIO.output(in2, s1>0)
-    GPIO.output(in3, s2 < 0)
-    GPIO.output(in4, s2 > 0)
+    GPIO.output(in3, s2 > 0)
+    GPIO.output(in4, s2 < 0)
 
     time.sleep(tim)
     stop()
@@ -80,4 +80,4 @@ def movetank(s1,s2,tim):
     stop()
     time.sleep(0.5)
 if __name__=="__main__":
-    movetank(40,80, 10)
+    movetank(50,80, 10)
