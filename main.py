@@ -265,6 +265,7 @@ def checking_state():
             print("avoiding state")
             avoidingstate(redbiggest)
             pass
+
         '''
         if lightsensor sense floor thing
         start turning right
@@ -277,6 +278,8 @@ def checking_state():
         k = cv2.waitKey(10) & 0xFF
         if k == 27:
             break
+
+        return redbiggest
         
 
 def avoidingstate(redbiggest):
