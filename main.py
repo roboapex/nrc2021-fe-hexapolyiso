@@ -264,7 +264,7 @@ def checking_state():
 
         
     
-def avoidingstate(checking_state):
+def avoidingstate(checking_state, redbiggest):
     while checking_state():
         if redbiggest==1:
             right()
