@@ -59,9 +59,6 @@ def gos(f,s):
     stop()
     time.sleep(0.5)
 if __name__=="__main__":
-    gos(forward,0.85)
-    gos(right, deg90)
-    gos(forward, 1.5)
-    gos(forward,1.5)
-    gos(right, deg90)
-    gos(forward, 1.5)
+    p.changeDutyCycle(100)
+    p2.changeDutyCycle(40)
+    forward()
