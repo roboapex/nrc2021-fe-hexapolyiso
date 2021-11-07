@@ -289,7 +289,7 @@ def avoidingstate(redbiggest):
             while True:
 
                 # start turning the right direction
-                xcoor = None
+                #xcoor = None
                 _, frame = cap.read()
                 blurred = frame
 
@@ -352,7 +352,7 @@ def avoidingstate(redbiggest):
             left()
             while True:
 
-                xcoor = None
+                #xcoor = None
                 _, frame = cap.read()
                 blurred = frame
 
@@ -376,12 +376,12 @@ def avoidingstate(redbiggest):
                         cv2.line(frame, (int(x + (w / 2)), 0), (int(x + (w / 2)), len(blurred)), (0, 255, 0), 1)
                         redbiggest = -1
                         xcoor = int((x + (w / 2)) / wid)
-                if int(xcoor) > greentresh:
+                if xcoor > greentresh:
                     finalturningtime=time.time()-(startturningtime)
                     stop()
                     while True:
                         forward()
-                        xcoor = None
+                        #xcoor = None
                         _, frame = cap.read()
                         blurred = frame
 
