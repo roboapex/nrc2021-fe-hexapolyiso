@@ -204,6 +204,7 @@ upper_green = numpy.array([90, 255, 255])
 
 minsize=2000
 
+
 def checking_state():
     print("moving state")
     forward()
@@ -235,40 +236,24 @@ def checking_state():
                 cv2.drawContours(frame, c, -1, (0, 255, 0), 3)
                 x, y, w, h = cv2.boundingRect(c)
 
-                '''
-                cv2.rectangle(frame, (x, y), (x + w, y + h), (0, 255, 0), 2)
-                cv2.line(frame, (int(x + (w / 2)), 0), (int(x + (w / 2)), len(blurred)), (0, 255, 0), 1)
-                redbiggest = -1
-                print("Green detected")
-                xcoor = int((x + (w / 2)) / wid)
-                '''
+   
         if len(contours2) > 0:
             # print("green")
             c2 = max(contours2, key=cv2.contourArea)
             if cv2.contourArea(c2) >= minsize:
                 cv2.drawContours(frame, c2, -1, (0, 0, 255), 3)
                 x2, y2, w2, h2 = cv2.boundingRect(c2)
-                
-                '''
-                cv2.rectangle(frame, (x2, y2), (x2 + w2, y2 + h2), (0, 0, 255), 2)
-                cv2.line(frame, (int(x2 + (w2 / 2)), 0), (int(x2 + (w2 / 2)), len(blurred)), (0, 0, 255), 1)
-                redbiggest = 1
-                print("Red detected")
-                xcoor = int(x2 + (w2 / 2)) / wid
-                '''
+
                 try:
                     if cv2.contourArea(c2) > cv2.contourArea(c):
                         print("red closer", end="\r")
                         redbiggest = 1
-                        M = cv2.moments(c)
-                        xcoor = int(M['m10']/M['m00'])
+                        
 
                         
                     else:
                         print("green closer", end="\r")
                         redbiggest = -1
-                        M = cv2.moments(c2)
-                        xcoor = int(M['m10']/M['m00'])
                         
                 except:
                     pass
@@ -277,11 +262,6 @@ def checking_state():
             avoidingstate(redbiggest)
             pass
 
-        '''
-        if lightsensor sense floor thing
-        start turning right
-        until sense again then turn other direction
-        '''
 
         if wind=="YES":
             cv2.imshow('Original', frame)
@@ -307,5 +287,6 @@ def avoidingstate(redbiggest, xcoor):
 
 cv2.destroyAllWindows()
 cap.release()
+
 
 
