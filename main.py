@@ -282,18 +282,18 @@ def checking_state():
         return redbiggest, xcoor
     
 def avoidingstate(redbiggest, xcoor):
-    while checking_state():
-        if redbiggest==1:
-            right()
+    if redbiggest==1:
+        right()
 
-        if redbiggest==-1:
-            left()
+    if redbiggest==-1:
+        left()
         
-        if redbiggest == 0:
-            forward()
+    if redbiggest == 0:
+        forward()
 
 
-
+while checking_state():
+    avoidingstate()
 
 cv2.destroyAllWindows()
 cap.release()
