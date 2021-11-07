@@ -106,7 +106,7 @@ while(1):
 import RPi.GPIO as GPIO
 import time
 wind=input("windows").upper()
-
+GPIO.cleanup()
 deg90=0.335
 
 in1 = 14
