@@ -1,6 +1,5 @@
 import RPi.GPIO as GPIO
 import time
-wind=input("windows").upper()
 
 deg90=0.335
 
