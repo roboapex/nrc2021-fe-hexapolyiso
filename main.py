@@ -263,8 +263,8 @@ def checking_state():
                     pass
         if redbiggest != 0:
             print("avoiding state")
-            avoidingstate(redbiggest)
-            pass
+            #avoidingstate(redbiggest)
+            #pass
 
         '''
         if lightsensor sense floor thing
