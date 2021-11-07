@@ -238,7 +238,7 @@ def checking_state():
                 cv2.line(frame, (int(x + (w / 2)), 0), (int(x + (w / 2)), len(blurred)), (0, 255, 0), 1)
                 redbiggest = -1
                 print("Green detected")
-                xcoor = int(x + (w / 2)) / wid
+                xcoor = int((x + (w / 2)) / wid)
         if len(contours2) > 0:
             # print("green")
             c2 = max(contours2, key=cv2.contourArea)
@@ -254,11 +254,11 @@ def checking_state():
                     if cv2.contourArea(c2) > cv2.contourArea(c):
                         print("red closer", end="\r")
                         redbiggest = 1
-                        xcoor = int(x2 + (w2 / 2)) / wid
+                        xcoor = int((x2 + (w2 / 2)) / wid)
                     else:
                         print("green closer", end="\r")
                         redbiggest = -1
-                        xcoor = int(x + (w / 2)) / wid
+                        xcoor = int((x + (w / 2)) / wid)
                 except:
                     pass
         if redbiggest != 0:
