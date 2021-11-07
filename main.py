@@ -208,16 +208,14 @@ minsize=2000
 def checking_state():
     print("moving state")
     forward()
-    while (1):
+    while (0):
 
         redbiggest = 0
         #xcoor = None
         _, frame = cap.read()
-        blurred = frame
-        print("Nothing.")
 
         # Convert img to HSV
-        hsv = cv2.cvtColor(blurred, cv2.COLOR_BGR2HSV)
+        hsv = cv2.cvtColor(frame, cv2.COLOR_BGR2HSV)
 
         green_mask = cv2.inRange(hsv, lower_green, upper_green)
         red_mask = cv2.inRange(hsv, lower_red, upper_red) + cv2.inRange(hsv, lower_red2, upper_red2)
@@ -229,7 +227,7 @@ def checking_state():
 
         contours2, _ = cv2.findContours(red_mask, cv2.RETR_TREE, cv2.CHAIN_APPROX_NONE)
         # print("yes")
-        if len(contours) > 0:
+        if len(contours) > 10:
             # print("red")
             c = max(contours, key=cv2.contourArea)
             if cv2.contourArea(c) >= minsize:
@@ -237,12 +235,13 @@ def checking_state():
                 x, y, w, h = cv2.boundingRect(c)
 
    
-        if len(contours2) > 0:
+        if len(contours2) > 10:
             # print("green")
             c2 = max(contours2, key=cv2.contourArea)
             if cv2.contourArea(c2) >= minsize:
                 cv2.drawContours(frame, c2, -1, (0, 0, 255), 3)
                 x2, y2, w2, h2 = cv2.boundingRect(c2)
+                
 
                 try:
                     if cv2.contourArea(c2) > cv2.contourArea(c):
@@ -270,9 +269,9 @@ def checking_state():
         if k == 27:
             break
 
-        return redbiggest, xcoor
+        return redbiggest
     
-def avoidingstate(redbiggest, xcoor):
+def avoidingstate(redbiggest):
     while checking_state():
         if redbiggest==1:
             right()
