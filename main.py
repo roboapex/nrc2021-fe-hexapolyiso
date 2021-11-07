@@ -275,6 +275,7 @@ def avoidingstate(checking_state, redbiggest):
         if redbiggest == 0:
             forward()
 
+checking_state()
 
 
 cv2.destroyAllWindows()
