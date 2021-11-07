@@ -46,5 +46,4 @@ def stop():
     GPIO.output(in2,False)
     GPIO.output(in3,False)
     GPIO.output(in4,False)
-
 forward()
