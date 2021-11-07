@@ -69,10 +69,10 @@ def movetank(s1,s2,tim):
 
     time.sleep(tim)
     stop()
-    p.ChangeDutyCycle(50)
-    p2.ChangeDutyCycle(50)
+    p.ChangeDutyCycle(40)
+    p2.ChangeDutyCycle(40)
     forward()
-    time.sleep(0.1)
+    time.sleep(0.5)
     stop()
     time.sleep(0.1)
     backward()
