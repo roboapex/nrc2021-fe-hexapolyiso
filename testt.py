@@ -78,6 +78,6 @@ def movetank(s1,s2,tim):
     backward()
     time.sleep(0.1)
     stop()
-    time.sleep(0.5)
+    time.sleep(0.05)
 if __name__=="__main__":
-    movetank(50, 100, 100)
+    movetank(60, 100, 100)
