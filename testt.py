@@ -59,7 +59,7 @@ def gos(f,s):
     time.sleep(0.1)
     stop()
     time.sleep(0.5)
-def movetank(s1,s2,time):
+def movetank(s1,s2,tim):
     p.ChangeDutyCycle(abs(s1))
     p2.ChangeDutyCycle(abs(s2))
     GPIO.output(in1, s1>0)
@@ -67,7 +67,7 @@ def movetank(s1,s2,time):
     GPIO.output(in3, s2 > 0)
     GPIO.output(in4, s2 < 0)
 
-    time.sleep(time)
+    time.sleep(tim)
     stop()
     p.ChangeDutyCycle(50)
     p2.ChangeDutyCycle(50)
