@@ -1,5 +1,6 @@
 import RPi.GPIO as GPIO
 import time
+GPIO.cleanup()
 deg90=0.335
 
 in1 = 14
@@ -62,3 +63,4 @@ if __name__=="__main__":
     p.ChangeDutyCycle(80)
     p2.ChangeDutyCycle(40)
     forward()
+    GPIO.cleanup()
