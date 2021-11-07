@@ -47,10 +47,4 @@ def stop():
     GPIO.output(in3,False)
     GPIO.output(in4,False)
 
-stop()
-def gos(f,s):
-    f()
-    time.sleep(s)
-
-
-gos(forward(), 5)
+forward()
