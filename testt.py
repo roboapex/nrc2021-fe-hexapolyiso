@@ -80,8 +80,4 @@ def movetank(s1,s2,time):
     stop()
     time.sleep(0.5)
 if __name__=="__main__":
-    p.ChangeDutyCycle(40)
-    p2.ChangeDutyCycle(80)
-    forward()
-    time.sleep(1000)
-    GPIO.cleanup()
+    movetank(40,80, 10)
