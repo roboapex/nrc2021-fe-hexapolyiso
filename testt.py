@@ -59,6 +59,6 @@ def gos(f,s):
     stop()
     time.sleep(0.5)
 if __name__=="__main__":
-    p.changeDutyCycle(100)
-    p2.changeDutyCycle(40)
+    p.ChangeDutyCycle(100)
+    p2.ChangeDutyCycle(40)
     forward()
