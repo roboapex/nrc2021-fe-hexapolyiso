@@ -249,7 +249,7 @@ def checking_state():
                 cv2.line(frame, (int(x2 + (w2 / 2)), 0), (int(x2 + (w2 / 2)), len(blurred)), (0, 0, 255), 1)
                 redbiggest = 1
                 print("Red detected")
-                xcoor = int((x2 + (w2 / 2)) / wid)
+                xcoor = int(x2 + (w2 / 2)) / wid
                 try:
                     if cv2.contourArea(c2) > cv2.contourArea(c):
                         print("red closer", end="\r")
@@ -279,13 +279,14 @@ def checking_state():
         if k == 27:
             break
 
-        return redbiggest
+        return redbiggest, xcoor
         
-def avoidingstate(redbiggest):
+def avoidingstate(redbiggest, xcoor):
     while checking_state():
         if redbiggest==1:
             startturningtime = time.time()
             right()
+            '''
             while True:
 
                 # start turning the right direction
@@ -299,7 +300,7 @@ def avoidingstate(redbiggest):
                 red_mask = cv2.inRange(hsv, lower_red, upper_red) + cv2.inRange(hsv, lower_red2, upper_red2)
                 if wind == "YES":
                     cv2.imshow("redmask", red_mask)
-
+                
                 contours2, _ = cv2.findContours(red_mask, cv2.RETR_TREE, cv2.CHAIN_APPROX_NONE)
                 if len(contours2) > 0:
                     # print("green")
@@ -311,10 +312,13 @@ def avoidingstate(redbiggest):
                         cv2.line(frame, (int(x2 + (w2 / 2)), 0), (int(x2 + (w2 / 2)), len(blurred)), (0, 0, 255), 1)
                         redbiggest = 1
                         xcoor = int(x2 + (w2 / 2)) / wid
-                if xcoor < redtresh: #need change operator and the value of redtresh
-                    finalturningtime = time.time() - (startturningtime)
-                    stop()
-                    forward()
+                '''
+                
+            if xcoor < redtresh: #need change operator and the value of redtresh
+                finalturningtime = time.time() - (startturningtime)
+                stop()
+                forward()
+                '''
                     while True:
 
                         #xcoor = None
@@ -341,15 +345,18 @@ def avoidingstate(redbiggest):
                                 xcoor = int(x2 + (w2 / 2)) / wid
                         else:
                             break
+                     
                     st = time.time()
                     left()
                     while (st + finalturningtime) - time.time() > 0:
 
                         pass
                     stop()
-        if redbiggest==-1:
+                    '''
+        elif redbiggest==-1:
             startturningtime=time.time()
             left()
+            '''
             while True:
 
                 #xcoor = None
@@ -376,9 +383,17 @@ def avoidingstate(redbiggest):
                         cv2.line(frame, (int(x + (w / 2)), 0), (int(x + (w / 2)), len(blurred)), (0, 255, 0), 1)
                         redbiggest = -1
                         xcoor = int(x + (w / 2)) / wid
-                if xcoor > greentresh:
-                    finalturningtime=time.time()-(startturningtime)
-                    stop()
+                '''
+            if xcoor > greentresh:
+                finalturningtime=time.time()-(startturningtime)
+                stop()
+                forward()
+                break
+
+        
+        elif redbiggest == 0:
+            forward()
+            '''
                     while True:
                         forward()
                         #xcoor = None
@@ -405,12 +420,16 @@ def avoidingstate(redbiggest):
                                 xcoor = int(x + (w / 2)) / wid
                         else:
                             break
-                    st=time.time()
+                        '''
+            '''
+                 st=time.time()
                     right()
                     while (st+finalturningtime)-time.time()>0:
                         #turn opposite direction
                         pass
                     stop()
+                    '''
+
 
 
 avoidingstate()
