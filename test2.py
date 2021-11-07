@@ -1,12 +1,12 @@
 import RPi.GPIO as GPIO
 import time
-
+GPIO.cleanup()
 deg90=0.335
 
 in1 = 14
 in2 = 15
 in3 = 9
-in4=11
+in4 = 11
 en1 = 13
 en2 = 12
 temp1=1
@@ -47,3 +47,6 @@ def stop():
     GPIO.output(in3,False)
     GPIO.output(in4,False)
 forward()
+time.sleep(10)
+stop()
+GPIO.cleanup()
