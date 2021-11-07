@@ -61,7 +61,7 @@ def gos(f,s):
     time.sleep(0.5)
 if __name__=="__main__":
     p.ChangeDutyCycle(40)
-    p2.ChangeDutyCycle(60)
+    p2.ChangeDutyCycle(80)
     forward()
     time.sleep(10)
     GPIO.cleanup()
