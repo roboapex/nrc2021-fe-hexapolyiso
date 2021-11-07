@@ -260,6 +260,8 @@ def checking_state():
         if k == 27:
             break
 
+    return redbiggest
+
         
     
 def avoidingstate(redbiggest):
