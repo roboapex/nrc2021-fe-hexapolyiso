@@ -278,7 +278,6 @@ def checking_state():
         if k == 27:
             break
         
-checking_state()
 
 def avoidingstate(redbiggest):
     if redbiggest==1:
@@ -412,7 +411,8 @@ def avoidingstate(redbiggest):
 
 
 
-
+checking_state()
+avoidingstate()
 
 cv2.destroyAllWindows()
 cap.release()
