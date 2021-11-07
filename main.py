@@ -260,10 +260,9 @@ def checking_state():
         if k == 27:
             break
 
-    return redbiggest
-
-        
+    return redbiggest 
     
+checking_state()
 def avoidingstate(checking_state, redbiggest):
     while checking_state():
         if redbiggest==1:
@@ -274,8 +273,9 @@ def avoidingstate(checking_state, redbiggest):
             
         if redbiggest == 0:
             forward()
+  
+  
 
-checking_state()
 
 
 cv2.destroyAllWindows()
