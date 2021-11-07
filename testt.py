@@ -19,8 +19,8 @@ GPIO.setup(en1,GPIO.OUT)
 p=GPIO.PWM(en1,1000)
 GPIO.setup(en2,GPIO.OUT)
 p2=GPIO.PWM(en2,1000)
-p.start(50)
-p2.start(50)
+p.start(60)
+p2.start(60)
 def forward():
     GPIO.output(in1,GPIO.LOW)
     GPIO.output(in2,GPIO.HIGH)
@@ -83,4 +83,4 @@ if __name__=="__main__":
     while True:
         movetank(65, 75, 1)
         gos(forward, 6)
-        movetank(65, 70, 2)
+        
