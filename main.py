@@ -376,7 +376,7 @@ def avoidingstate(redbiggest):
                         cv2.line(frame, (int(x + (w / 2)), 0), (int(x + (w / 2)), len(blurred)), (0, 255, 0), 1)
                         redbiggest = -1
                         xcoor = int((x + (w / 2)) / wid)
-                if xcoor > greentresh:
+                if int(xcoor) > greentresh:
                     finalturningtime=time.time()-(startturningtime)
                     stop()
                     while True:
