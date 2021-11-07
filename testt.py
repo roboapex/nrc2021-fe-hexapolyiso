@@ -83,3 +83,4 @@ if __name__=="__main__":
     while True:
         movetank(65, 70, 2)
         gos(forward, 5)
+        movetank(65, 70, 2)
