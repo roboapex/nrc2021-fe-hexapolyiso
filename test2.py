@@ -51,13 +51,6 @@ stop()
 def gos(f,s):
     f()
     time.sleep(s)
-    forward()
-    time.sleep(0.1)
-    stop()
-    time.sleep(0.1)
-    backward()
-    time.sleep(0.1)
-    stop()
-    time.sleep(0.5)
 
-gos(forward, 5)
+
+gos(forward(), 5)
