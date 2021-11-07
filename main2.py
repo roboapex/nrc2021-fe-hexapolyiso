@@ -72,22 +72,50 @@ frame = cv2.imread('/home/pi/DeepPiCar/driver/data/road1_240x320.png')
 hsv = cv2.cvtColor(frame, cv2.COLOR_BGR2HSV)
 
 
+def detect_lane(frame):
+    
+    edges = detect_edges(frame)
+
+    cropped_edges = region_of_interest(edges)
+
+    line_segments = detect_line_segments(cropped_edges)
+
+
+    lane_lines = average_slope_intercept(frame, line_segments)
+
+    return lane_lines
+
+
 def detect_edges(frame):
     # filter for blue lane lines
     hsv = cv2.cvtColor(frame, cv2.COLOR_BGR2HSV)
+    lower_blue = np.array([30, 40, 0])
+    upper_blue = np.array([150, 255, 255])
+    mask = cv2.inRange(hsv, lower_blue, upper_blue)
+
+    # detect edges
+    edges = cv2.Canny(mask, 200, 400)
+
+    return edges
+
+def detect_edges_old(frame):
+    # filter for blue lane lines
+    hsv = cv2.cvtColor(frame, cv2.COLOR_BGR2HSV)
     lower_black = np.array([0, 0, 0])
-    upper_black = np.array([360, 255, 50])
+    upper_black = np.array([360, 255, 30])
     mask = cv2.inRange(hsv, lower_black, upper_black)
 
     edges = cv2.Canny(mask, 200, 400)
 
     return edges
 
-def region_of_interest(edges):
-    height, width = edges.shape
-    mask = np.zeros_like(edges)
+
+def region_of_interest(canny):
+    height, width = canny.shape
+    mask = np.zeros_like(canny)
 
     # only focus bottom half of the screen
+
     polygon = np.array([[
         (0, height * 1 / 2),
         (width, height * 1 / 2),
@@ -96,21 +124,19 @@ def region_of_interest(edges):
     ]], np.int32)
 
     cv2.fillPoly(mask, polygon, 255)
-    cropped_edges = cv2.bitwise_and(edges, mask)
-    return cropped_edges
+    masked_image = cv2.bitwise_and(canny, mask)
+    return masked_image
 
 
 def detect_line_segments(cropped_edges):
     # tuning min_threshold, minLineLength, maxLineGap is a trial and error process by hand
-    rho = 1  # distance precision in pixel, i.e. 1 pixel
-    angle = np.pi / 180  # angular precision in radian, i.e. 1 degree
+    rho = 1  # precision in pixel, i.e. 1 pixel
+    angle = np.pi / 180  # degree in radian, i.e. 1 degree
     min_threshold = 10  # minimal of votes
-    line_segments = cv2.HoughLinesP(cropped_edges, rho, angle, min_threshold, 
-                                    np.array([]), minLineLength=8, maxLineGap=4)
+    line_segments = cv2.HoughLinesP(cropped_edges, rho, angle, min_threshold, np.array([]), minLineLength=8,
+                                    maxLineGap=4)
 
-    
     return line_segments
-
 
 def make_points(frame, line):
     height, width, _ = frame.shape
@@ -123,16 +149,15 @@ def make_points(frame, line):
     x2 = max(-width, min(2 * width, int((y2 - intercept) / slope)))
     return [[x1, y1, x2, y2]]
 
+
 def average_slope_intercept(frame, line_segments):
     """
     This function combines line segments into one or two lane lines
     If all line slopes are < 0: then we only have detected left lane
     If all line slopes are > 0: then we only have detected right lane
     """
-    
     lane_lines = []
     if line_segments is None:
-        
         return lane_lines
 
     height, width, _ = frame.shape
@@ -165,16 +190,7 @@ def average_slope_intercept(frame, line_segments):
     if len(right_fit) > 0:
         lane_lines.append(make_points(frame, right_fit_average))
 
-    return lane_lines
 
-
-def detect_lane(frame):
-    
-    edges = detect_edges(frame)
-    cropped_edges = region_of_interest(edges)
-    line_segments = detect_line_segments(cropped_edges)
-    lane_lines = average_slope_intercept(frame, line_segments)
-    
     return lane_lines
 
 
@@ -183,6 +199,7 @@ def compute_steering_angle(frame, lane_lines):
         We assume that camera is calibrated to point to dead center
     """
     if len(lane_lines) == 0:
+        logging.info('No lane lines detected, do nothing')
         return -90
 
     height, width, _ = frame.shape
@@ -205,39 +222,12 @@ def compute_steering_angle(frame, lane_lines):
 
     return steering_angle
 
-def display_heading_line(frame, steering_angle, line_color=(0, 0, 255), line_width=5 ):
-    heading_image = np.zeros_like(frame)
-    height, width, _ = frame.shape
 
-    # figure out the heading line from steering angle
-    # heading line (x1,y1) is always center bottom of the screen
-    # (x2, y2) requires a bit of trigonometry
-
-    # Note: the steering angle of:
-    # 0-89 degree: turn left
-    # 90 degree: going straight
-    # 91-180 degree: turn right 
-    steering_angle_radian = steering_angle / 180.0 * math.pi
-    x1 = int(width / 2)
-    y1 = height
-    x2 = int(x1 - height / 2 / math.tan(steering_angle_radian))
-    y2 = int(height / 2)
-
-    cv2.line(heading_image, (x1, y1), (x2, y2), line_color, line_width)
-    heading_image = cv2.addWeighted(frame, 0.8, heading_image, 1, 1)
-
-    return heading_image
-
-def stabilize_steering_angle(
-          curr_steering_angle, 
-          new_steering_angle, 
-          num_of_lane_lines, 
-          max_angle_deviation_two_lines=5, 
-          max_angle_deviation_one_lane=1):
+def stabilize_steering_angle(curr_steering_angle, new_steering_angle, num_of_lane_lines, max_angle_deviation_two_lines=5, max_angle_deviation_one_lane=1):
     """
     Using last steering angle to stabilize the steering angle
-    if new angle is too different from current angle, 
-    only turn by max_angle_deviation degrees
+    This can be improved to use last N angles, etc
+    if new angle is too different from current angle, only turn by max_angle_deviation degrees
     """
     if num_of_lane_lines == 2 :
         # if both lane lines detected, then we can deviate more
@@ -249,11 +239,12 @@ def stabilize_steering_angle(
     angle_deviation = new_steering_angle - curr_steering_angle
     if abs(angle_deviation) > max_angle_deviation:
         stabilized_steering_angle = int(curr_steering_angle
-            + max_angle_deviation * angle_deviation / abs(angle_deviation))
+                                        + max_angle_deviation * angle_deviation / abs(angle_deviation))
     else:
         stabilized_steering_angle = new_steering_angle
-
     return stabilized_steering_angle
+
+
 
 
 
