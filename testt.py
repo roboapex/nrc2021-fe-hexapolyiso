@@ -63,5 +63,5 @@ if __name__=="__main__":
     p.ChangeDutyCycle(40)
     p2.ChangeDutyCycle(80)
     forward()
-    time.sleep(10)
+    time.sleep(1000)
     GPIO.cleanup()
