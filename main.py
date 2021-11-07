@@ -310,8 +310,8 @@ def avoidingstate(redbiggest):
                         cv2.rectangle(frame, (x2, y2), (x2 + w2, y2 + h2), (0, 0, 255), 2)
                         cv2.line(frame, (int(x2 + (w2 / 2)), 0), (int(x2 + (w2 / 2)), len(blurred)), (0, 0, 255), 1)
                         redbiggest = 1
-                        xcoor = int(x2 + (w2 / 2)) / wid
-                if xcoor < redtresh:#need change operator and the value of rtedtresh
+                        xcoor = int((x2 + (w2 / 2)) / wid)
+                if xcoor < redtresh: #need change operator and the value of redtresh
                     finalturningtime = time.time() - (startturningtime)
                     stop()
                     forward()
