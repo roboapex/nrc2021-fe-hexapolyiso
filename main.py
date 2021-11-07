@@ -264,7 +264,7 @@ def checking_state():
 
         
     
-def avoidingstate(redbiggest):
+def avoidingstate(checking_state):
     while checking_state():
         if redbiggest==1:
             right()
@@ -275,7 +275,7 @@ def avoidingstate(redbiggest):
         if redbiggest == 0:
             forward()
 
-avoidingstate()
+
 
 cv2.destroyAllWindows()
 cap.release()
