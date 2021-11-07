@@ -1,6 +1,5 @@
 import RPi.GPIO as GPIO
 import time
-GPIO.cleanup()
 deg90=0.335
 
 in1 = 14
