@@ -280,138 +280,137 @@ def checking_state():
         
 
 def avoidingstate(redbiggest):
-    if redbiggest==1:
-        startturningtime = time.time()
-        right()
-        while True:
+    while checking_state():
+        if redbiggest==1:
+            startturningtime = time.time()
+            right()
+            while True:
 
-            # start turning the right direction
-            xcoor = None
-            _, frame = cap.read()
-            blurred = frame
+                # start turning the right direction
+                xcoor = None
+                _, frame = cap.read()
+                blurred = frame
 
-            # Convert img to HSV
-            hsv = cv2.cvtColor(blurred, cv2.COLOR_BGR2HSV)
+                # Convert img to HSV
+                hsv = cv2.cvtColor(blurred, cv2.COLOR_BGR2HSV)
 
-            red_mask = cv2.inRange(hsv, lower_red, upper_red) + cv2.inRange(hsv, lower_red2, upper_red2)
-            if wind == "YES":
-                cv2.imshow("redmask", red_mask)
+                red_mask = cv2.inRange(hsv, lower_red, upper_red) + cv2.inRange(hsv, lower_red2, upper_red2)
+                if wind == "YES":
+                    cv2.imshow("redmask", red_mask)
 
-            contours2, _ = cv2.findContours(red_mask, cv2.RETR_TREE, cv2.CHAIN_APPROX_NONE)
-            if len(contours2) > 0:
-                # print("green")
-                c2 = max(contours2, key=cv2.contourArea)
-                if cv2.contourArea(c2) >= minsize:
-                    cv2.drawContours(frame, c2, -1, (0, 0, 255), 3)
-                    x2, y2, w2, h2 = cv2.boundingRect(c2)
-                    cv2.rectangle(frame, (x2, y2), (x2 + w2, y2 + h2), (0, 0, 255), 2)
-                    cv2.line(frame, (int(x2 + (w2 / 2)), 0), (int(x2 + (w2 / 2)), len(blurred)), (0, 0, 255), 1)
-                    redbiggest = 1
-                    xcoor = int(x2 + (w2 / 2)) / wid
-            if xcoor < redtresh:#need change operator and the value of rtedtresh
-                finalturningtime = time.time() - (startturningtime)
-                stop()
-                forward()
-                while True:
-
-                    xcoor = None
-                    _, frame = cap.read()
-                    blurred = frame
-
-                    # Convert img to HSV
-                    hsv = cv2.cvtColor(blurred, cv2.COLOR_BGR2HSV)
-
-                    red_mask = cv2.inRange(hsv, lower_red, upper_red) + cv2.inRange(hsv, lower_red2, upper_red2)
-                    if wind == "YES":
-                        cv2.imshow("redmask", red_mask)
-
-                    contours2, _ = cv2.findContours(red_mask, cv2.RETR_TREE, cv2.CHAIN_APPROX_NONE)
-                    if len(contours2) > 0:
-                        # print("green")
-                        c2 = max(contours2, key=cv2.contourArea)
-                        if cv2.contourArea(c2) >= minsize:
-                            cv2.drawContours(frame, c2, -1, (0, 0, 255), 3)
-                            x2, y2, w2, h2 = cv2.boundingRect(c2)
-                            cv2.rectangle(frame, (x2, y2), (x2 + w2, y2 + h2), (0, 0, 255), 2)
-                            cv2.line(frame, (int(x2 + (w2 / 2)), 0), (int(x2 + (w2 / 2)), len(blurred)), (0, 0, 255), 1)
-                            redbiggest = 1
-                            xcoor = int(x2 + (w2 / 2)) / wid
-                    else:
-                        break
-                st = time.time()
-                left()
-                while (st + finalturningtime) - time.time() > 0:
-
-                    pass
-                stop()
-    if redbiggest==-1:
-        startturningtime=time.time()
-        left()
-        while True:
-
-            xcoor = None
-            _, frame = cap.read()
-            blurred = frame
-
-            # Convert img to HSV
-            hsv = cv2.cvtColor(blurred, cv2.COLOR_BGR2HSV)
-
-            green_mask = cv2.inRange(hsv, lower_green, upper_green)
-
-
-
-            contours, _ = cv2.findContours(green_mask, cv2.RETR_TREE, cv2.CHAIN_APPROX_NONE)
-
-
-            if len(contours) > 0:
-                # print("red")
-                c = max(contours, key=cv2.contourArea)
-                if cv2.contourArea(c) >= minsize:
-                    cv2.drawContours(frame, c, -1, (0, 255, 0), 3)
-                    x, y, w, h = cv2.boundingRect(c)
-                    cv2.rectangle(frame, (x, y), (x + w, y + h), (0, 255, 0), 2)
-                    cv2.line(frame, (int(x + (w / 2)), 0), (int(x + (w / 2)), len(blurred)), (0, 255, 0), 1)
-                    redbiggest = -1
-                    xcoor = int(x + (w / 2)) / wid
-            if xcoor>greentresh:
-                finalturningtime=time.time()-(startturningtime)
-                stop()
-                while True:
+                contours2, _ = cv2.findContours(red_mask, cv2.RETR_TREE, cv2.CHAIN_APPROX_NONE)
+                if len(contours2) > 0:
+                    # print("green")
+                    c2 = max(contours2, key=cv2.contourArea)
+                    if cv2.contourArea(c2) >= minsize:
+                        cv2.drawContours(frame, c2, -1, (0, 0, 255), 3)
+                        x2, y2, w2, h2 = cv2.boundingRect(c2)
+                        cv2.rectangle(frame, (x2, y2), (x2 + w2, y2 + h2), (0, 0, 255), 2)
+                        cv2.line(frame, (int(x2 + (w2 / 2)), 0), (int(x2 + (w2 / 2)), len(blurred)), (0, 0, 255), 1)
+                        redbiggest = 1
+                        xcoor = int(x2 + (w2 / 2)) / wid
+                if xcoor < redtresh:#need change operator and the value of rtedtresh
+                    finalturningtime = time.time() - (startturningtime)
+                    stop()
                     forward()
-                    xcoor = None
-                    _, frame = cap.read()
-                    blurred = frame
+                    while True:
 
-                    # Convert img to HSV
-                    hsv = cv2.cvtColor(blurred, cv2.COLOR_BGR2HSV)
+                        xcoor = None
+                        _, frame = cap.read()
+                        blurred = frame
 
-                    green_mask = cv2.inRange(hsv, lower_green, upper_green)
+                        # Convert img to HSV
+                        hsv = cv2.cvtColor(blurred, cv2.COLOR_BGR2HSV)
+
+                        red_mask = cv2.inRange(hsv, lower_red, upper_red) + cv2.inRange(hsv, lower_red2, upper_red2)
+                        if wind == "YES":
+                            cv2.imshow("redmask", red_mask)
+
+                        contours2, _ = cv2.findContours(red_mask, cv2.RETR_TREE, cv2.CHAIN_APPROX_NONE)
+                        if len(contours2) > 0:
+                            # print("green")
+                            c2 = max(contours2, key=cv2.contourArea)
+                            if cv2.contourArea(c2) >= minsize:
+                                cv2.drawContours(frame, c2, -1, (0, 0, 255), 3)
+                                x2, y2, w2, h2 = cv2.boundingRect(c2)
+                                cv2.rectangle(frame, (x2, y2), (x2 + w2, y2 + h2), (0, 0, 255), 2)
+                                cv2.line(frame, (int(x2 + (w2 / 2)), 0), (int(x2 + (w2 / 2)), len(blurred)), (0, 0, 255), 1)
+                                redbiggest = 1
+                                xcoor = int(x2 + (w2 / 2)) / wid
+                        else:
+                            break
+                    st = time.time()
+                    left()
+                    while (st + finalturningtime) - time.time() > 0:
+
+                        pass
+                    stop()
+        if redbiggest==-1:
+            startturningtime=time.time()
+            left()
+            while True:
+
+                xcoor = None
+                _, frame = cap.read()
+                blurred = frame
+
+                # Convert img to HSV
+                hsv = cv2.cvtColor(blurred, cv2.COLOR_BGR2HSV)
+
+                green_mask = cv2.inRange(hsv, lower_green, upper_green)
 
 
-                    contours, _ = cv2.findContours(green_mask, cv2.RETR_TREE, cv2.CHAIN_APPROX_NONE)
 
-                    if len(contours) > 0:
-                        # print("red")
-                        c = max(contours, key=cv2.contourArea)
-                        if cv2.contourArea(c) >= minsize:
-                            cv2.drawContours(frame, c, -1, (0, 255, 0), 3)
-                            x, y, w, h = cv2.boundingRect(c)
-                            cv2.rectangle(frame, (x, y), (x + w, y + h), (0, 255, 0), 2)
-                            cv2.line(frame, (int(x + (w / 2)), 0), (int(x + (w / 2)), len(blurred)), (0, 255, 0), 1)
-                            redbiggest = -1
-                            xcoor = int(x + (w / 2)) / wid
-                    else:
-                        break
-                st=time.time()
-                right()
-                while (st+finalturningtime)-time.time()>0:
-                    #turn opposite direction
-                    pass
-                stop()
+                contours, _ = cv2.findContours(green_mask, cv2.RETR_TREE, cv2.CHAIN_APPROX_NONE)
 
 
+                if len(contours) > 0:
+                    # print("red")
+                    c = max(contours, key=cv2.contourArea)
+                    if cv2.contourArea(c) >= minsize:
+                        cv2.drawContours(frame, c, -1, (0, 255, 0), 3)
+                        x, y, w, h = cv2.boundingRect(c)
+                        cv2.rectangle(frame, (x, y), (x + w, y + h), (0, 255, 0), 2)
+                        cv2.line(frame, (int(x + (w / 2)), 0), (int(x + (w / 2)), len(blurred)), (0, 255, 0), 1)
+                        redbiggest = -1
+                        xcoor = int(x + (w / 2)) / wid
+                if xcoor>greentresh:
+                    finalturningtime=time.time()-(startturningtime)
+                    stop()
+                    while True:
+                        forward()
+                        xcoor = None
+                        _, frame = cap.read()
+                        blurred = frame
 
-checking_state()
+                        # Convert img to HSV
+                        hsv = cv2.cvtColor(blurred, cv2.COLOR_BGR2HSV)
+
+                        green_mask = cv2.inRange(hsv, lower_green, upper_green)
+
+
+                        contours, _ = cv2.findContours(green_mask, cv2.RETR_TREE, cv2.CHAIN_APPROX_NONE)
+
+                        if len(contours) > 0:
+                            # print("red")
+                            c = max(contours, key=cv2.contourArea)
+                            if cv2.contourArea(c) >= minsize:
+                                cv2.drawContours(frame, c, -1, (0, 255, 0), 3)
+                                x, y, w, h = cv2.boundingRect(c)
+                                cv2.rectangle(frame, (x, y), (x + w, y + h), (0, 255, 0), 2)
+                                cv2.line(frame, (int(x + (w / 2)), 0), (int(x + (w / 2)), len(blurred)), (0, 255, 0), 1)
+                                redbiggest = -1
+                                xcoor = int(x + (w / 2)) / wid
+                        else:
+                            break
+                    st=time.time()
+                    right()
+                    while (st+finalturningtime)-time.time()>0:
+                        #turn opposite direction
+                        pass
+                    stop()
+
+
 avoidingstate()
 
 cv2.destroyAllWindows()
