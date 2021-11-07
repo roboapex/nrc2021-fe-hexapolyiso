@@ -70,7 +70,7 @@ def movetank(s1,s2,tim):
     time.sleep(tim)
     stop()
     p.ChangeDutyCycle(50)
-    p2.ChangeDutyCycle(70)
+    p2.ChangeDutyCycle(50)
     forward()
     time.sleep(0.1)
     stop()
