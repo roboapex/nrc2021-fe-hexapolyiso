@@ -171,10 +171,10 @@ def gos(f,s):
 import cv2
 import numpy
 import time
-# import board
-# import adafruit_tcs34725
-# i2c = board.I2C()
-# sensor = adafruit_tcs34725.TCS34725(i2c)
+import board
+import adafruit_tcs34725
+i2c = board.I2C()
+sensor = adafruit_tcs34725.TCS34725(i2c)
 
 wid=320
 hei=240
@@ -203,6 +203,20 @@ upper_green = numpy.array([90, 255, 255])
 
 
 minsize=2000
+
+def isorange(c):
+
+    if (c[1] < 55 & c[1] > 43 & c[2] < 47` & c[2] > 35):
+        return True
+    return False
+
+
+
+def isblue(c):
+    if (c[1] < 58 & c[1] > 45 & c[2] < 40 & c[2] > 26):
+        return True
+    return False
+
 
 def checking_state():
     print("moving state")
@@ -270,6 +284,12 @@ def checking_state():
         start turning right
         until sense again then turn other direction
         '''
+        if isorange(sensor.color_rgb_bytes) or isblue(sensor.color_rgb_bytes):
+            right()
+            time.sleep(0.5)
+            forward()
+            time.sleep(0.5)
+
 
         if wind=="YES":
             cv2.imshow('Original', frame)

@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="1dc3b1e4-640b-4cfd-86ff-d0842cc81bc2" name="Changes" comment="pu9dvfeowrvrqgaflaflsaf&#10;/eaeg;v;gkneaeasafgkn;kg;enkegn;kn;aegkan;dg" />
+    <list default="true" id="1dc3b1e4-640b-4cfd-86ff-d0842cc81bc2" name="Changes" comment="pu9dvfeowrvrqgaflaflsaf&#10;/eaeg;v;gkneaeasafgkn;kg;enkegn;kn;aegkan;dg">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
