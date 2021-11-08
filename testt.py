@@ -90,7 +90,7 @@ if __name__== "__main__":
     gos(right, 0.95)
     gos(forward, 7.5)
     gos(right, 1.2)
-    gos(forward, 6)
+    gos(forward, 8)
     gos(right, 1.2)
     gos(forward, 5)
     stop()
