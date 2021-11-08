@@ -16,12 +16,12 @@ GPIO.setup(in1,GPIO.OUT)
 GPIO.setup(in2,GPIO.OUT)
 GPIO.setup(in4,GPIO.OUT)
 GPIO.setup(in3,GPIO.OUT)
-GPIO.setup(en1,GPIO.OUT)
 GPIO.output(in1,GPIO.LOW)
 GPIO.output(in2,GPIO.LOW)
 GPIO.output(in3, GPIO.LOW)
 GPIO.output(in4, GPIO.LOW)
 
+GPIO.setup(en1,GPIO.OUT)
 p=GPIO.PWM(en1,1000)
 GPIO.setup(en2,GPIO.OUT)
 p2=GPIO.PWM(en2,1000)
@@ -32,25 +32,25 @@ p2.start(60)
 
 #MOVEMENT FUNCTIONS
 def forward():
-    GPIO.output(in1,GPIO.HIGH)
-    GPIO.output(in2,GPIO.LOW)
-    GPIO.output(in3,GPIO.HIGH)
-    GPIO.output(in4,GPIO.LOW)
-def backward():
     GPIO.output(in1,GPIO.LOW)
     GPIO.output(in2,GPIO.HIGH)
     GPIO.output(in3,GPIO.LOW)
     GPIO.output(in4,GPIO.HIGH)
-def right():
+def backward():
     GPIO.output(in1,GPIO.HIGH)
     GPIO.output(in2,GPIO.LOW)
+    GPIO.output(in3,GPIO.HIGH)
+    GPIO.output(in4,GPIO.LOW)
+def right():
+    GPIO.output(in1,GPIO.LOW)
+    GPIO.output(in2,GPIO.HIGH)
     GPIO.output(in3,GPIO.LOW)
     GPIO.output(in4,GPIO.LOW)
 def left():
     GPIO.output(in1,GPIO.LOW)
     GPIO.output(in2,GPIO.LOW)
-    GPIO.output(in3,GPIO.HIGH)
-    GPIO.output(in4,GPIO.LOW)
+    GPIO.output(in3,GPIO.LOW)
+    GPIO.output(in4,GPIO.HIGH)
 def stop():
     GPIO.output(in1,GPIO.LOW)
     GPIO.output(in2,GPIO.LOW)
@@ -86,10 +86,12 @@ def movetank(s1,s2,tim):
 '''
 
 if __name__== "__main__":
+    gos(forward, 1.4)
+    gos(right, 0.73)
     gos(forward, 5)
-    gos(right, 0.5)
+    gos(right, 1.4)
+    gos(forward, 5.5)
+    gos(right, 1.5)
     gos(forward, 5)
-    gos(left, 0.5)
-    gos(backward, 5)
     stop()
     GPIO.cleanup()
