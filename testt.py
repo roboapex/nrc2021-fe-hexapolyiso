@@ -42,15 +42,15 @@ def backward():
     GPIO.output(in3,GPIO.HIGH)
     GPIO.output(in4,GPIO.LOW)
 def right():
-    GPIO.output(in1,GPIO.HIGH)
-    GPIO.output(in2,GPIO.LOW)
+    GPIO.output(in1,GPIO.LOW)
+    GPIO.output(in2,GPIO.HIGH)
     GPIO.output(in3,GPIO.LOW)
     GPIO.output(in4,GPIO.LOW)
 def left():
     GPIO.output(in1,GPIO.LOW)
     GPIO.output(in2,GPIO.LOW)
-    GPIO.output(in3,GPIO.HIGH)
-    GPIO.output(in4,GPIO.LOW)
+    GPIO.output(in3,GPIO.LOW)
+    GPIO.output(in4,GPIO.HIGH)
 def stop():
     GPIO.output(in1,GPIO.LOW)
     GPIO.output(in2,GPIO.LOW)
@@ -86,10 +86,10 @@ def movetank(s1,s2,tim):
 '''
 
 if __name__== "__main__":
-    gos(forward, 5)
-    gos(right, 1)
-    gos(forward, 5)
-    gos(left, 1)
-    gos(backward, 5)
+    gos(forward, 2)
+    gos(right, 2.5)
+    gos(forward, 4)
+    gos(right, 2.5)
+    gos(forward, 4)
     stop()
     GPIO.cleanup()
