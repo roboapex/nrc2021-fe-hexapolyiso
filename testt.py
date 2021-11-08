@@ -92,6 +92,6 @@ if __name__== "__main__":
     gos(right, 1.2)
     gos(forward, 8)
     gos(right, 1.3)
-    gos(forward, 5)
+    gos(forward, 6)
     stop()
     GPIO.cleanup()
