@@ -206,7 +206,7 @@ minsize=2000
 
 def isorange(c):
 
-    if (c[1] < 55 & c[1] > 43 & c[2] < 47` & c[2] > 35):
+    if (c[1] < 55 & c[1] > 43 & c[2] < 47 & c[2] > 35):
         return True
     return False
 
