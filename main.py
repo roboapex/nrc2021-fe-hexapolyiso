@@ -298,6 +298,7 @@ def checking_state():
         
 
 def avoidingstate(redbiggest):
+    print("Clem bad")
     if redbiggest==1:
         startturningtime = time.time()
         right()
