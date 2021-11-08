@@ -221,7 +221,7 @@ def isblue(c):
 def checking_state():
     print("moving state")
     forward()
-    while (0):
+    while (1):
 
         redbiggest = 0
         xcoor = None
@@ -294,9 +294,7 @@ def checking_state():
         if wind=="YES":
             cv2.imshow('Original', frame)
 
-        k = cv2.waitKey(10) & 0xFF
-        if k == 27:
-            break
+        
         
 
 def avoidingstate(redbiggest):
@@ -364,6 +362,7 @@ def avoidingstate(redbiggest):
 
                     pass
                 stop()
+                break
     if redbiggest==-1:
         startturningtime=time.time()
         left()
@@ -428,7 +427,8 @@ def avoidingstate(redbiggest):
                     #turn opposite direction
                     pass
                 stop()
-
+                break
+    checking_state()
 
 
 checking_state()
