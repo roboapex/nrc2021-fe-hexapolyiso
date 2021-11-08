@@ -286,9 +286,9 @@ def checking_state():
         '''
         if isorange(sensor.color_rgb_bytes) or isblue(sensor.color_rgb_bytes):
             right()
-            time.sleep(0.5)
+            time.sleep(1)
             forward()
-            time.sleep(0.5)
+            time.sleep(1)
 
 
         if wind=="YES":
