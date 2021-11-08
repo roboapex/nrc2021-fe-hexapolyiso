@@ -86,8 +86,8 @@ def movetank(s1,s2,tim):
 '''
 
 if __name__== "__main__":
-    gos(forward, 2)
-    gos(right, 2.5)
+    gos(forward, 1.5)
+    gos(right, 1.5)
     gos(forward, 4)
     gos(right, 2.5)
     gos(forward, 4)
