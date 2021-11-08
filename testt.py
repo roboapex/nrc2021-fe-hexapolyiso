@@ -87,11 +87,11 @@ def movetank(s1,s2,tim):
 
 if __name__== "__main__":
     gos(forward, 1.3)
-    gos(right, 0.7)
+    gos(right, 0.75)
     gos(forward, 5)
     gos(right, 1.5)
     gos(forward, 5.5)
     gos(right, 1.5)
-    gos(forward, 3)
+    gos(forward, 5)
     stop()
     GPIO.cleanup()
